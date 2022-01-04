@@ -5,7 +5,7 @@ spent per function
 ## Generate cpu.prof
 Run the following command to create the cpu.prof file
 
-``go test -cpuprofile cpu.prof -memprofile mem.prof -bench .=``
+`` go test -cpuprofile cpu.prof -bench .=``
 
 ## Analyze functions
 First connect to pprof by running the command ``go tool pprof cpu.prof``

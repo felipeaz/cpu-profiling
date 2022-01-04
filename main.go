@@ -50,7 +50,6 @@ func goroutinesNonDivisibleSubset(k int32, s []int32) int32 {
 	// The subset sum will be stored into the channel pool
 	// during the execution
 	size := len(s)
-	wg.Add(size)
 	ch := make(chan int32, size)
 
 	go generateSubset(s, k, size, ch)
@@ -88,7 +87,6 @@ func generateSubset(s []int32, k int32, size int, ch chan<- int32) {
 		// Added the current subset element to the slice
 		subset = append(subset, s[i])
 		ch <- subsetLen
-		wg.Done()
 	}
 	close(ch)
 }
@@ -108,8 +106,6 @@ func respectSubsetRule(subsetElem int32, elem int32, num int32) bool {
 }
 
 func main() {
-	wg.Add(2)
-	go nonDivisibleSubset(3, input)
-	//go goroutinesNonDivisibleSubset(3, subset)
-	wg.Wait()
+	nonDivisibleSubset(3, input)
+	//goroutinesNonDivisibleSubset(3, input)
 }
